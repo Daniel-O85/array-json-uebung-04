@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /***************************
+       * Breite festgelegt
+       * Border Ecken abgerundet
+       *************************/
+    img {
+      width: 500px;
+      border-radius: 15px;
+    }
+    /****************************
+       * Inhalt zentriert
+       * Hintergrundfarbe
+       * innerern Abstand gegeben
+       ***************************/
+    #verbinden {
+      text-align: center;
+      background-color: rgb(194, 224, 243);
+      padding: 20px;
+    }
+    /***************************
+       * Äußeren Abstand gegeben
+       *************************/
+    .tabelle {
+      margin-bottom: 200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /****************************
+       * Border gegeben
+       * Inneren Abstand gegeben
+       * Äußeren Abstand gegeben
+       * Breite festgelegt
+       * Inhalt zentriert
+       * Border Ecken abgerundet
+       **************************/
+    .karte {
+      border: groove 5px skyblue;
+      padding: 50px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 50px;
+      width: 800px;
+      text-align: center;
+      border-radius: 15px;
+    }
+  </style>
+  <body>
+    <!-------------
+    Div für die ausgabe von 
+    Javascript in Html
+    -------------->
+    <div id="verbinden"></div>
+
+    <!---------
+        JavaScript... Start
+        --------->
+    <script>
+      /******************
+       * HTML Verbindung
+       ******************/
+      const v = document.getElementById("verbinden");
+
+      /*******************************
+       * Funktion 1 zweiBilder
+       ******************************/
+      function zweiBilder(bild1, bild2) {
+        return `<div><img src="${bild1}"/><hr><div><img src="${bild2}"/>`;
+      }
+      /*******************************
+       * Funktion 2 details
+       ******************************/
+      function details(produkt, menge, preis) {
+        return `<tr><td>${produkt}</td><td>${menge}</td><td>${preis}</tr></td>`;
+      }
+      /*******************************
+       * Funktion 3 tabellelAnlegen
+       ******************************/
+      function tabelleAnlegen(inhalt) {
+        let liste = `<table class="tabelle"><tr><th>Produkt:</th><th>Menge:</th><th>Preis:</th></tr>`;
+        for (let l = 0; l < inhalt.length; l++)
+          liste += details(inhalt[l].Produkt, inhalt[l].Menge, inhalt[l].Preis);
+        liste += `</table>`;
+        return liste;
+      }
+      /*******************************
+       * Funktion 3 tabellelAnlegen
+       ******************************/
+      function karteAnlegen(bild1, bild2, tabelle) {
+        return `<div class="karte">${zweiBilder(bild1, bild2)} ${tabelleAnlegen(
+          tabelle
+        )}</div>`;
+      }
+
+      /************************************
+       * konstante karte... Array mit JSON
+       *************************************/
+      const karte = [
+        {
+          /*******************************
+           * Quelltext für die Bilder
+           ******************************/
+          bild1:
+            "https://media1.faz.net/ppmedia/aktuell/reise/1030251653/1.6630353/default-retina/menschheitsikone-kein-berg-ist.jpg",
+          bild2:
+            "https://img1.outdoor-magazin.com/4000er-in-den-Alpen-hoechste-Berge-Gipfel-Mont-Blanc-169FullWidth-26b7697d-1918570.jpg",
+
+          /*******************************
+           * Inhalt der Tabelle
+           ******************************/
+          tabelle: [
+            { Produkt: "Klettergurt", Menge: "1 Stück", Preis: "89.99€" },
+
+            { Produkt: "Helm", Menge: "1 Stück", Preis: "119.99€" },
+
+            { Produkt: "Kletterhaken", Menge: "10 Stück", Preis: "99.99€" },
+          ],
+        },
+        {
+          /*******************************
+           * Quelltext für die Bilder
+           ******************************/
+          bild1:
+            "https://fabricbike.com/983-large_default/fixie-fahrrad-original.jpg",
+          bild2:
+            "https://www.volare-kinderfahrraeder.de/images/detailed/35/Paw_Patrol_-_12_inch_-_2_tr-W1800.jpg",
+
+          /*******************************
+           * Inhalt der Tabelle
+           ******************************/
+          tabelle: [
+            { Produkt: "Sattel", Menge: "1 Stück", Preis: "49.99€" },
+
+            { Produkt: "Helm", Menge: "1 Stück", Preis: "69.99€" },
+
+            { Produkt: "Trinkflasche", Menge: "1 Stück", Preis: "19.99€" },
+          ],
+        },
+        {
+          /*******************************
+           * Quelltext für die Bilder
+           ******************************/
+          bild1:
+            "https://image.brigitte.de/11539928/t/i_/v2/w1440/r1.5/-/kleiner-garten--so-gestaltest-du-ihn-richtig--bild.jpg",
+          bild2:
+            "https://www.meister-und-meister.de/wp-content/uploads/2019/06/kleiner-garten-bb.jpg",
+
+          /*******************************
+           * Inhalt der Tabelle
+           ******************************/
+          tabelle: [
+            { Produkt: "Gartentisch", Menge: "1 Stück", Preis: "79.99€" },
+
+            { Produkt: "Gartenstühle", Menge: "4 Stück", Preis: "349.99€" },
+
+            { Produkt: "Sonnenschirm", Menge: "1 Stück", Preis: "199.99€" },
+          ],
+        },
+      ];
+
+      /************************************
+       * for-schleife
+       *************************************/
+      for (let k = 0; k < karte.length; k++)
+        verbinden.innerHTML += karteAnlegen(
+          karte[k].bild1,
+          karte[k].bild2,
+          karte[k].tabelle
+        );
+    </script>
+    <!---------
+        JavaScript... Ende
+        --------->
+  </body>
+</html>
